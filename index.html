@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Longley's Economic Data Visualization</title>
+  <meta charset="utf-8">
+  <meta name="description" content="Longley's Economic Data Visualization">
+  <meta name="author" content="">
+  <meta name="generator" content="slidify" />
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta http-equiv="X-UA-Compatible" content="chrome=1">
+  <link rel="stylesheet" href="libraries/frameworks/io2012/css/default.css" media="all" >
+  <link rel="stylesheet" href="libraries/frameworks/io2012/css/phone.css" 
+    media="only screen and (max-device-width: 480px)" >
+  <link rel="stylesheet" href="libraries/frameworks/io2012/css/slidify.css" >
+  <link rel="stylesheet" href="libraries/highlighters/highlight.js/css/tomorrow.css" />
+  <base target="_blank"> <!-- This amazingness opens all links in a new tab. -->  <link rel=stylesheet href="libraries/widgets/morris/css/morris.css"></link>
+<link rel=stylesheet href="./assets/css/ribbons.css"></link>
+
+  
+  <!-- Grab CDN jQuery, fall back to local if offline -->
+  <script src="http://ajax.aspnetcdn.com/ajax/jQuery/jquery-1.7.min.js"></script>
+  <script>window.jQuery || document.write('<script src="libraries/widgets/quiz/js/jquery.js"><\/script>')</script> 
+  <script data-main="libraries/frameworks/io2012/js/slides" 
+    src="libraries/frameworks/io2012/js/require-1.0.8.min.js">
+  </script>
+  
+  <script src="libraries/widgets/morris/js/jquery-1.8.2.min.js"></script>
+<script src="libraries/widgets/morris/js/raphael-2.1.0.min.js"></script>
+<script src="libraries/widgets/morris/js/morris.min.js"></script>
+
+
+</head>
+<body style="opacity: 0">
+  <slides class="layout-widescreen">
+    
+    <!-- LOGO SLIDE -->
+        <slide class="title-slide segue nobackground">
+  <hgroup class="auto-fadein">
+    <h1>Longley's Economic Data Visualization</h1>
+    <h2>Shiny App for Developing Data Products Course</h2>
+    <p><br/></p>
+  </hgroup>
+  <article></article>  
+</slide>
+    
+
+    <!-- SLIDES -->
+    <slide class="" id="slide-1" style="background:;">
+  <hgroup>
+    <h2>App description and motivation</h2>
+  </hgroup>
+  <article data-timings="">
+    <p>The app visualizes the <a href="http://stat.ethz.ch/R-manual/R-devel/library/datasets/html/longley.html">Longley&#39;s Economic Data</a> dataset from R <code>datasets</code> package. </p>
+
+<p>Visualization techniques help to explore the data and, on the other hand, to present the results. The app focuses on the first part, it is a tool for primary data exploration.</p>
+
+<p>The app is devided into three tabs:</p>
+
+<ul>
+<li><code>Visualized Data</code> shows a time series plot for proportions of employed, unemployed and people in the armed forces that provides useful way to explore the changes over years</li>
+<li><code>Dataset</code> presents the data in table form and includes widgets to manipulate with the table to look at the data in details</li>
+<li><code>Description</code> includes the short description of the app and the dataset</li>
+</ul>
+
+  </article>
+  <!-- Presenter Notes -->
+</slide>
+
+<slide class="" id="slide-2" style="background:;">
+  <hgroup>
+    <h2>Dataset</h2>
+  </hgroup>
+  <article data-timings="">
+    <p>The dataset includes 7 variables observed yearly from 1947 to 1962:</p>
+
+<ul>
+<li><code>GNP.deflator</code> - GNP implicit price deflator (1954=100)</li>
+<li><code>GNP</code> - Gross National Product</li>
+<li><code>Unemployed</code> - number of unemployed (in tens)</li>
+<li><code>Armed.Forces</code> - number of people in the armed forces (in tens)</li>
+<li><code>Population</code> - noninstitutionalized population more than 14 years old (in thousands)</li>
+<li><code>Year</code> - the year (time)</li>
+<li><code>Employed</code> - proportion of people employed</li>
+</ul>
+
+<blockquote><font size = -1>Data source: J. W. Longley (1967) An appraisal of least-squares programs from the point of view of the user. <em>Journal of the American Statistical Association</em> 62, 819–841.</font></blockquote>
+
+  </article>
+  <!-- Presenter Notes -->
+</slide>
+
+<slide class="" id="slide-3" style="background:;">
+  <hgroup>
+    <h2>Time series plot</h2>
+  </hgroup>
+  <article data-timings="">
+    <p>Presents the proportions of selected groups of population (employed, unemployed and people in the armed forces) with customized period of interest in years
+<iframe src=' assets/fig/unnamed-chunk-1-1.html ' scrolling='no' frameBorder='0' seamless class='rChart morris ' id=iframe- chart9e70c5352a5 ></iframe> <style>iframe.rChart{ width: 100%; height: 400px;}</style></p>
+
+  </article>
+  <!-- Presenter Notes -->
+</slide>
+
+<slide class="" id="slide-4" style="background:;">
+  <hgroup>
+    <h2>Dataset in table form</h2>
+  </hgroup>
+  <article data-timings="">
+    <ul>
+<li>Presents the data in table form with customized subset of the variable to show and period of interest in years</li>
+</ul>
+
+<p><img style="margin:0px auto; display:block" src = "figure/tabs.png"></p>
+
+<ul>
+<li>The app calculates an average proportion of employed for selected period</li>
+</ul>
+
+<pre><code class="r"># An average proportion of employed from 1954 to 1962
+mean(longley$Employed[as.numeric(longley$Year)&gt;1953])
+</code></pre>
+
+<pre><code>## [1] 67.82444
+</code></pre>
+
+  </article>
+  <!-- Presenter Notes -->
+</slide>
+
+    <slide class="backdrop"></slide>
+  </slides>
+  <div class="pagination pagination-small" id='io2012-ptoc' style="display:none;">
+    <ul>
+      <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=1 title='App description and motivation'>
+         1
+      </a>
+    </li>
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=2 title='Dataset'>
+         2
+      </a>
+    </li>
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=3 title='Time series plot'>
+         3
+      </a>
+    </li>
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=4 title='Dataset in table form'>
+         4
+      </a>
+    </li>
+  </ul>
+  </div>  <!--[if IE]>
+    <script 
+      src="http://ajax.googleapis.com/ajax/libs/chrome-frame/1/CFInstall.min.js">  
+    </script>
+    <script>CFInstall.check({mode: 'overlay'});</script>
+  <![endif]-->
+</body>
+  <!-- Load Javascripts for Widgets -->
+  
+  <!-- LOAD HIGHLIGHTER JS FILES -->
+  <script src="libraries/highlighters/highlight.js/highlight.pack.js"></script>
+  <script>hljs.initHighlightingOnLoad();</script>
+  <!-- DONE LOADING HIGHLIGHTER JS FILES -->
+   
+  </html>

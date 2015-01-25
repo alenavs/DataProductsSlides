@@ -1,0 +1,76 @@
+---
+title       : Longley's Economic Data Visualization
+subtitle    : Shiny App for Developing Data Products Course
+author      : 
+job         : 
+framework   : io2012        # {io2012, html5slides, shower, dzslides, ...}
+highlighter : highlight.js  # {highlight.js, prettify, highlight}
+hitheme     : tomorrow      # 
+widgets     : []            # {mathjax, quiz, bootstrap}
+mode        : selfcontained # {standalone, draft}
+knit        : slidify::knit2slides
+ext_widgets : {rCharts: ["libraries/morris"]}
+
+--- 
+
+## App description and motivation
+The app visualizes the [Longley's Economic Data](http://stat.ethz.ch/R-manual/R-devel/library/datasets/html/longley.html) dataset from R `datasets` package. 
+
+Visualization techniques help to explore the data and, on the other hand, to present the results. The app focuses on the first part, it is a tool for primary data exploration.
+
+The app is devided into three tabs:
+
+* `Visualized Data` shows a time series plot for proportions of employed, unemployed and people in the armed forces that provides useful way to explore the changes over years
+* `Dataset` presents the data in table form and includes widgets to manipulate with the table to look at the data in details
+* `Description` includes the short description of the app and the dataset
+
+
+--- 
+
+## Dataset
+
+ The dataset includes 7 variables observed yearly from 1947 to 1962:
+* `GNP.deflator` - GNP implicit price deflator (1954=100)
+* `GNP` - Gross National Product
+* `Unemployed` - number of unemployed (in tens)
+* `Armed.Forces` - number of people in the armed forces (in tens)
+* `Population` - noninstitutionalized population more than 14 years old (in thousands)
+* `Year` - the year (time)
+* `Employed` - proportion of people employed
+
+<blockquote><font size = -1>Data source: J. W. Longley (1967) An appraisal of least-squares programs from the point of view of the user. <em>Journal of the American Statistical Association</em> 62, 819–841.</font></blockquote>
+
+--- 
+
+## Time series plot 
+Presents the proportions of selected groups of population (employed, unemployed and people in the armed forces) with customized period of interest in years
+```{r echo = F, results ='asis', message=FALSE, warning=FALSE}
+library(rCharts)  
+require(knitr)
+data<-longley
+data$Year <- as.character(longley$Year)
+data$Armed.Forces <- format(longley$Armed.Forces/longley$Population, digits=2)
+data$Unemployed <- format(longley$Unemployed/longley$Population, digits=2)
+data$Employed <- format(longley$Employed, digits=3)
+m1 <- mPlot(x = "Year", y =c("Armed.Forces","Unemployed"), type = "Line", data = data)
+m1$set(pointSize = 1, lineWidth = 2)
+m1
+```
+
+
+
+---
+
+## Dataset in table form
+* Presents the data in table form with customized subset of the variable to show and period of interest in years
+
+<img style="margin:0px auto; display:block" src = "figure/tabs.png">
+
+* The app calculates an average proportion of employed for selected period
+```{r}
+# An average proportion of employed from 1954 to 1962
+mean(longley$Employed[as.numeric(longley$Year)>1953])
+```
+
+
+
